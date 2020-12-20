@@ -9,10 +9,9 @@ import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
-import com.neeraj.cipherator.api.Cipherator;
-import com.neeraj.cipherator.enums.EncryptionAlgorithm;
+import com.neeraj.cipherator.api.CipherApi;
 
-public class AES implements Cipherator {
+public class AES implements CipherApi {
 	
 	private SecretKeySpec secretKey;
 	private byte[] key;
@@ -33,7 +32,7 @@ public class AES implements Cipherator {
 	}
 
 	@Override
-	public String encrypt(EncryptionAlgorithm encryptionAlgorithm, String key, String data) {
+	public String encrypt(String data, String key) {
 		
 		try {
 			setKey(key);
@@ -47,7 +46,7 @@ public class AES implements Cipherator {
 	}
 
 	@Override
-	public String decrypt(EncryptionAlgorithm encryptionAlgorithm, String key, String data) {
+	public String decrypt(String data, String key) {
 		
 		try {
 			setKey(key);
