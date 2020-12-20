@@ -31,7 +31,7 @@ public class CustomCipher implements CipherApi {
 		int[] keyIndexes = findCoprimeIndexesOfKey(shiftedKey);
 
 		int i = 0, len = keyIndexes.length;
-		StringBuilder encyrptedText = new StringBuilder();
+		StringBuilder encryptedText = new StringBuilder();
 		for (char c : dataToBeEncrypted.toCharArray()) {
 			if (chars.contains(c)) {
 				if (i < len) {
@@ -39,7 +39,7 @@ public class CustomCipher implements CipherApi {
 //					int keyIndex = chars.indexOf(shiftedKey.charAt(i));
 					int keyIndex = keyIndexes[i];
 					int newIndex = (keyIndex * dataIndex) % n;
-					encyrptedText.append(chars.get(newIndex));
+					encryptedText.append(chars.get(newIndex));
 					i++;
 				} else {
 					i = 0;
@@ -47,13 +47,15 @@ public class CustomCipher implements CipherApi {
 //					int keyIndex = chars.indexOf(shiftedKey.charAt(i));
 					int keyIndex = keyIndexes[i];
 					int newIndex = (keyIndex * dataIndex) % n;
-					encyrptedText.append(chars.get(newIndex));
+					encryptedText.append(chars.get(newIndex));
 					i++;
 				}
+			} else {
+				encryptedText.append(c);
 			}
 		}
 
-		return encyrptedText.toString();
+		return encryptedText.toString();
 	}
 
 	/**
@@ -90,7 +92,7 @@ public class CustomCipher implements CipherApi {
 		int[] keyIndexes = findCoprimeIndexesOfKey(shiftedKey);
 
 		int i = 0, len = keyIndexes.length;
-		StringBuilder decyrptedText = new StringBuilder();
+		StringBuilder decryptedText = new StringBuilder();
 		// write a method to find multiplicative inverse of key
 
 		for (char c : dataToBeDecrypted.toCharArray()) {
@@ -99,20 +101,23 @@ public class CustomCipher implements CipherApi {
 					int dataIndex = chars.indexOf(c);
 					int keyIndex = multiplicativeInverse(keyIndexes[i]);
 					int newIndex = (dataIndex * keyIndex) % n;
-					decyrptedText.append(chars.get(newIndex));
+					decryptedText.append(chars.get(newIndex));
 					i++;
 				} else {
 					i = 0;
 					int dataIndex = chars.indexOf(c);
 					int keyIndex = multiplicativeInverse(keyIndexes[i]);
 					int newIndex = (keyIndex * dataIndex) % n;
-					decyrptedText.append(chars.get(newIndex));
+					decryptedText.append(chars.get(newIndex));
 					i++;
 				}
 			}
+			else {
+				decryptedText.append(c);
+			}
 		}
 
-		return decyrptedText.toString();
+		return decryptedText.toString();
 	}
 
 	private int multiplicativeInverse(int keyIndex) {

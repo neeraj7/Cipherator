@@ -8,7 +8,7 @@ public class CutomCipherTest {
 	@Test
 	public void testEncrypt() {
 		String secretKey = "abc";
-		String data = "neeraj";
+		String data = "Let's test this algorith!!!";
 		CustomCipher cipherator = new CustomCipher();
 		String encryptedText = cipherator.encrypt(data, secretKey);
 		Assert.assertTrue(!data.equals(encryptedText));
